@@ -9,7 +9,7 @@ namespace Catalog.Infrastructure
         public static void SeedData(IMongoCollection<ProductType> typesCollection)
         {
             bool typeExist = typesCollection.Find(x => true).Any();
-            string path = Path.Combine(Directory.GetCurrentDirectory(), "Data","SeedData", "brands.json");
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "Data","SeedData", "types.json");
             
             // check existing brand or insert a brand into the file
             if (!typeExist)
