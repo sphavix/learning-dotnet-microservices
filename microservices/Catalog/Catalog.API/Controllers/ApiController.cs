@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+
 namespace Catalog.API.Controllers
 {
     [ApiVersion("1")]
@@ -6,5 +7,6 @@ namespace Catalog.API.Controllers
     [ApiController]
     public class ApiController : ControllerBase
     {
+        
     }
 }
