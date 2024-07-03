@@ -14,7 +14,7 @@ namespace Catalog.Infrastructure.Data
 
         public ProductCatalogContext(IConfiguration configuration)
         {
-            var client = new MongoClient(configuration.GetValue<string>("DatabaseSettings:ConnectionString"));
+            var client = new MongoClient(configuration.GetValue<string>("DatabaseSettings:ConnectionStrings"));
             var database = client.GetDatabase(configuration.GetValue<string>("DatabaseSettings:DatabaseName"));
             Brands = database.GetCollection<ProductBrand>(configuration.GetValue<string>("DatabaseSettings:BrandsCollectionName"));
             Types = database.GetCollection<ProductType>(configuration.GetValue<string>("DatabaseSettings:TypesCollectionName"));
