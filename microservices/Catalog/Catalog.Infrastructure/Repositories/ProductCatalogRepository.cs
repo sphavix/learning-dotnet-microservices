@@ -27,14 +27,14 @@ namespace Catalog.Infrastructure.Repositories
 
             if(!string.IsNullOrEmpty(catalogSpecifications.BrandId))
             {
-                var brandFilter = builder.Regex(x => x.ProductBrand.Id, new BsonRegularExpression(catalogSpecifications.BrandId));
+                var brandFilter = builder.Eq(x => x.ProductBrand.Id, catalogSpecifications.BrandId);
                 filter &= brandFilter;
             }
 
             if(!string.IsNullOrEmpty(catalogSpecifications.TypeId))
             {
-                var typesFilter = builder.Regex(x => x.ProductType.Id, new BsonRegularExpression(catalogSpecifications.TypeId));
-                filter &= typesFilter;
+                var typeFilter = builder.Eq(x => x.ProductType.Id, catalogSpecifications.TypeId);
+                filter &= typeFilter;
             }
 
             if(!string.IsNullOrEmpty(catalogSpecifications.Sort))
