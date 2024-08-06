@@ -9,12 +9,12 @@ namespace Catalog.Infrastructure
         public static void SeedData(IMongoCollection<ProductType> typesCollection)
         {
             bool typeExist = typesCollection.Find(x => true).Any();
-            string path = Path.Combine(Directory.GetCurrentDirectory(), "Data","SeedData", "types.json");
+            //string path = Path.Combine(Directory.GetCurrentDirectory(), "Data","SeedData", "types.json");
             
             // check existing brand or insert a brand into the file
             if (!typeExist)
             {
-                var typesData = File.ReadAllText(path);
+                var typesData = File.ReadAllText("../Catalog/Catalog.Infrastructure/Data/SeedData/types.json");
                 var productTypes = JsonSerializer.Deserialize<List<ProductType>>(typesData);
 
                 if(productTypes is not null)
