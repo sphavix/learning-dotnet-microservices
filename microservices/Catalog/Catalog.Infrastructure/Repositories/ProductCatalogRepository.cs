@@ -1,6 +1,8 @@
 using Catalog.Core.Entities;
 using Catalog.Core.Repositories;
+using Catalog.Core.Specifications;
 using Catalog.Infrastructure.Data;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace Catalog.Infrastructure.Repositories
@@ -12,8 +14,29 @@ namespace Catalog.Infrastructure.Repositories
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
-        public async Task<IEnumerable<Product>> GetProductsAsync()
+        public async Task<IEnumerable<Product>> GetProductsAsync(CatalogSpecifications catalogSpecifications)
         {
+            var builder = Builders<Product>.Filter;
+            var filter = builder.Empty;
+
+            if(!string.IsNullOrEmpty(catalogSpecifications.Search))
+            {
+                var searchFilter = builder.Regex(x => x.Name, new BsonRegularExpression(catalogSpecifications.Search));
+                filter &= searchFilter;
+            }
+
+            if(!string.IsNullOrEmpty(catalogSpecifications.BrandId))
+            {
+                var brandFilter = builder.Regex(x => x.ProductBrand.Id, new BsonRegularExpression(catalogSpecifications.BrandId));
+                filter &= brandFilter;
+            }
+
+            if(!string.IsNullOrEmpty(catalogSpecifications.TypeId))
+            {
+                var typesFilter = builder.Regex(x => x.ProductType.Id, new BsonRegularExpression(catalogSpecifications.TypeId));
+                filter &= typesFilter;
+            }
+
             return await _context.Products.Find(p => true).ToListAsync();
         }
 
