@@ -4,7 +4,7 @@ namespace Catalog.Core.Specifications
     {
          public Pagination(){ }
 
-        public Pagination(int pageIndex, int pageSize, int count, IReadOnlyList<T> items)
+        public Pagination(int pageIndex, int pageSize, long count, IReadOnlyList<T> items)
         {
             PageIndex = pageIndex;
             PageSize = pageSize;
@@ -14,7 +14,7 @@ namespace Catalog.Core.Specifications
 
         public int PageIndex { get; set; }
         public int PageSize { get; set;}
-        public int Count { get; set; }
+        public long Count { get; set; }
         public IReadOnlyList<T> Items { get; set; }
     }
 }
