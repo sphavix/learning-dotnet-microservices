@@ -98,8 +98,8 @@ namespace Catalog.API.Controllers
         [ProducesResponseType(typeof(ProductResponse), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> DeleteProduct(string id)
         {
-            var query = new DeleteProductByIdQuery(id);
-            var result = await _mediator.Send(query);
+            var command = new DeleteProductByIdCommand(id);
+            var result = await _mediator.Send(command);
             return Ok(result);
         }
     }
